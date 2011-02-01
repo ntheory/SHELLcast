@@ -1,4 +1,4 @@
-# This readme is for SHELLcast version 0.1, released on April 3rd, 2003
+# This readme is for SHELLcast version 0.2, released on April 23rd, 2003
 
 # Notes:
 #   Right now I can't imagine a single thing to put here.
@@ -17,3 +17,15 @@
 #     - Show someone what happens when you dial up a COCOT with your modem
 #     - Let people spy on your daily shell activities out of the goodness of
 #       your heart
+
+# If you have Perl's Time::HiRes module you can now record and playback your
+# sessions (or "rebroadcast" them).
+
+  # How to record your sessions:
+  #   perl scr.pl HOSTNAME PORT > RECORDFILE
+
+  # How to playback your sessions:
+  #   cat RECORDFILE | perl scp.pl
+
+  # How to rebroadcast your sessions:
+  #   cat RECORDFILE | perl SHELLcast.pl

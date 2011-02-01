@@ -42,21 +42,52 @@ $| = 1;
 # Read raw data from STDIN
 ReadMode 4;
 
-my $Delay = 0.10;
 my $Character;
 
 my @Ready;
+
+my $IAC         = chr (0xFF);
+my $WILL        = chr (0xFB);
+
+my $ECHO        = chr (0x01);
 
 # Tell the client we'll echo their characters (but we won't).  This
 # is just like entering a password on a telnet session.  This way
 # the client doesn't echo the characters themselves and make it look
 # like they're successfully typing over us.
-my $TelnetWillEcho = chr (0xFF) . chr (0xFB) . chr (0x01);
+my $TelnetWillEcho        = $IAC . $WILL . $ECHO;
 
 # wait until there's something to do 
 while (1) {
-  if (($Character = ReadKey ($Delay, STDIN)) ||
-      (@Ready = $Select->can_read ($Delay))) {
+  $Character = ReadKey (0, STDIN);
+  @Ready = $Select->can_read (0);
+
+  if (defined ($Character)) {
+    # Send this data to our clients.
+    if ($Character eq "\n") {
+      # Slap an extra CR on there in case the incoming program doesn't send
+      # CRLF (just LF).
+      $Character .= "\r";
+    }
+
+    print $Character;
+
+    for $Socket ($Select->handles) {
+      # Skip the listening socket.
+      next if ($Socket == $Listen);
+
+      if ($Socket->peername) {
+        $Socket->send ($Character);
+      }
+      else {
+        print $Socket->fileno . ": disconnected\n\r";		
+        $Select->remove ($Socket);
+        $Socket->close;
+      }
+    }
+  }
+  
+  if (@Ready) {
     my $Socket;
 
     # Handle each socket that's ready
@@ -66,32 +97,8 @@ while (1) {
         my $New = $Listen->accept;
         $Select->add ($New);
         print $New->fileno . ": connected\n\r";
+
 	$New->send ($TelnetWillEcho);
-      }
-    }
-
-    if (defined ($Character)) {
-      # Send this data to our clients.
-      if ($Character eq "\n") {
-	# Slap an extra CR on there in case the incoming program doesn't send
-	# CRLF (just LF).
-        $Character .= "\r";
-      }
-
-      print $Character;
-
-      for $Socket ($Select->handles) {
-        # Skip the listening socket.
-        next if ($Socket == $Listen);
-
-        if ($Socket->peername) {
-          $Socket->send ($Character);
-	}
-	else {
-          print $Socket->fileno . ": disconnected\n\r";		
-          $Select->remove ($Socket);
-          $Socket->close;
-        }
       }
     }
   }

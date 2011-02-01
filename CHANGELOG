@@ -1,2 +1,8 @@
 # Change log:
 #   Initial version (0.1).  Nothing exciting here.
+
+#   Version 0.2 -- April 23rd, 2003
+#     - Fixed problem with "0" characters.  Not sure how I missed that.
+#     - Did minor inner loop tuning.
+#     - Made telnet IAC stuff more readable.
+#     - Added scr.pl (SHELLcast Recorder) and scp.pl (SHELLcast Playback)
