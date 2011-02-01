@@ -1,0 +1,20 @@
+# This NAQ is for SHELLcast version 0.1, released on April 3rd, 2003
+
+# What is SHELLcast?
+#   SHELLcast is a Perl script that allows others to monitor a console-based
+#   program that you run.
+
+# Why does everything have the pound/hash/splat/octothorpe/grid/square
+# character in front of it in this file?!
+#   This stuff used to be in the beginning of the source file until I realized
+#   that that was really stupid.
+
+# Why are you releasing this?
+#   There are a bunch of reasons.  I'll be sure to update this section in the
+#   next release.
+
+# This program sucks!
+#   E-mail me at ntheory@cloud9.net.  Suggest something, submit something,
+#   but please just don't let the hate fester in your head!  How else will
+#   this program get better?  OK, OK, if you really, really don't like it/me
+#   just write something better and e-mail it to me.  I love free GPS software.

@@ -1,0 +1,19 @@
+# This readme is for SHELLcast version 0.1, released on April 3rd, 2003
+
+# Notes:
+#   Right now I can't imagine a single thing to put here.
+
+# How to run SHELLcast (just one of the many ways):
+#   CONSOLE_PROGRAM_TO_RUN | perl SHELLcast.pl
+
+# How to get something useful out of it:
+#   Well, I can think of a few useful things this program can do.  Here's a
+#   quick list:
+#     - Show ANSI-based Tetris on the latest (only?) BBS you found to an
+#       audience 
+#     - Show someone how to run a console-based application
+#     - Give tutorials on how to hack into some poor unsuspecting soul's
+#       poorly protected Linux box
+#     - Show someone what happens when you dial up a COCOT with your modem
+#     - Let people spy on your daily shell activities out of the goodness of
+#       your heart
